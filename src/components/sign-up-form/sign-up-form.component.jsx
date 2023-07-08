@@ -38,17 +38,13 @@ const SignUpForm = () => {
     try {
       // if user is auth with email
       const { user } = await createAuthUserFromEmailAndPassword(email, password);
-      debugger
       // create user doc if not
       await createUserDocumentFromAuth(user, { displayName });
       resetFormFields();
     } catch (error) {
-      debugger
       if (error.code === 'auth/email-already-in-use'){
         console.log("Account in use");
         alert("email already used");
-        // const userSignedIn = await signInAuthUserWithEmailAndPassword(email, password);
-        // console.log(userSignedIn)
       } else {
         console.log(error);
       }
@@ -58,7 +54,7 @@ const SignUpForm = () => {
   return (
     <div className="sign-up-container">
       <h2>Don't have an account?</h2>
-      <h1>Sign up with your email and password</h1>
+      <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput 
           label='Display Name'
