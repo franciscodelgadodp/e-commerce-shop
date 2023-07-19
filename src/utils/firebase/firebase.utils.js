@@ -31,7 +31,7 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
-const provider = new GoogleAuthProvider();
+export const provider = new GoogleAuthProvider();
 provider.setCustomParameters({
   prompt: "select_account"
 });
@@ -62,7 +62,7 @@ export const createUserDocumentFromAuth = async (userAuth, aditionalInfo = {}) =
     }
   }
 
-  return userDocRef;
+  return userSnapshot;
 };
 
 export const createAuthUserFromEmailAndPassword = async (email, password) => {
@@ -99,6 +99,17 @@ export const getCategoriesAndDocuments = async () => {
   const querySnapshot = await getDocs(q);
 
   return querySnapshot.docs.map(docSnapshot => docSnapshot.data());
-  
+};
 
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    )
+  });
 };
