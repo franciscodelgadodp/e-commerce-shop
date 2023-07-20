@@ -11,7 +11,8 @@ import { selectCurrentUser } from "../../store/user/user.selector";
 
 import { NavigationContainer, NavLink, NavLinks, LogoContainer } from './navigation.styles';
 import { selectIsCartOpen } from "../../store/cart/cart.selector";
-import { signOutStart } from "../../store/user/user.action";
+import { signOutStart } from "../../store/user/user.reducer";
+// import { signOutStart } from "../../store/user/user.action";
 
 
 const Navigation = () => {

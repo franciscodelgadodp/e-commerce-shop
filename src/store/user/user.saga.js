@@ -1,8 +1,18 @@
 import { takeLatest, all, call, put } from 'redux-saga/effects';
 
-import { USER_ACTION_TYPES } from './user.types';
-
-import { signInSuccess, signInFailed, signOutSuccess, signUpSuccess, signUpFailed, signOutFailed } from './user.action';
+import { 
+  checkUserSession, 
+  emailSignInStart, 
+  googleSignInStart, 
+  signInSuccess,
+  signInFailed,
+  signOutStart,
+  signOutSuccess,
+  signOutFailed,
+  signUpStart,
+  signUpSuccess,
+  signUpFailed
+} from './user.reducer';
 
 import { 
   createAuthUserFromEmailAndPassword, 
@@ -33,7 +43,7 @@ export function* signUpUser(action) {
     debugger;
     yield put(signUpSuccess(user, { displayName }));
   } catch (error) {
-    put(signInFailed(error));
+    put(signUpFailed(error));
   }
 }
 
@@ -93,27 +103,27 @@ export function* isUserAuthenticated() {
 
 
 export function* onSignUpSuccess() {
-  yield takeLatest(USER_ACTION_TYPES.SIGN_UP_SUCCESS, signInAfterSignUp);
+  yield takeLatest(signUpSuccess.type, signInAfterSignUp);
 }
 
 export function* onUserSignUpStart() {
-  yield takeLatest(USER_ACTION_TYPES.SIGN_UP_START, signUpUser)
+  yield takeLatest(signUpStart.type, signUpUser)
 }
 
 export function* onUserSignOutStart() {
-  yield takeLatest(USER_ACTION_TYPES.SIGN_OUT_START, onSignOutUser)
+  yield takeLatest(signOutStart.type, onSignOutUser)
 }
 
 export function* onGoogleSignInStart() {
-  yield takeLatest(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START, signInUserByGoogle)
+  yield takeLatest(googleSignInStart.type, signInUserByGoogle)
 }
 
 export function* onEmailSignInStart() {
-  yield takeLatest(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, signInUserByEmail);
+  yield takeLatest(emailSignInStart.type, signInUserByEmail);
 }
 
 export function* onCheckUserSession() {
-  yield takeLatest(USER_ACTION_TYPES.CHECK_USER_SESSION, isUserAuthenticated);
+  yield takeLatest(checkUserSession.type, isUserAuthenticated);
 }
 
 export function* userSagas() {
