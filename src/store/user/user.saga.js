@@ -27,7 +27,6 @@ import {
 export function* signInAfterSignUp({ payload }) {
   try { 
     const { user, additionalDetails } = payload;
-    debugger;
     yield call(getSnapshotFromUserAuth, user, additionalDetails);
   } catch (error) {
     put(signUpFailed(error));
@@ -40,7 +39,6 @@ export function* signUpUser(action) {
     const { email, password, displayName } = action.payload;
 
     const { user } = yield call(createAuthUserFromEmailAndPassword, email, password);
-    debugger;
     yield put(signUpSuccess(user, { displayName }));
   } catch (error) {
     put(signUpFailed(error));
