@@ -10,7 +10,7 @@ export type CartState = {
 
 export type RemoveItemFromCartPayload = { 
   productToRemove: CartItem;
-  completeRemoval: boolean;
+  completeRemoval?: boolean;
 };
 
 const INITIAL_STATE: CartState = {

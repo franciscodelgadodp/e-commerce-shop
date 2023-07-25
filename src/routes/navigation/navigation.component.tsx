@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, SyntheticEvent } from "react";
 import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -20,7 +20,8 @@ const Navigation = () => {
   const currentUser = useSelector(selectCurrentUser);
   const isCartOpen = useSelector(selectIsCartOpen);
 
-  const signOutHandler = () => {
+  const signOutHandler = (event: SyntheticEvent) => {
+    event.preventDefault();
     dispatch(signOutStart());
   };
 
@@ -36,7 +37,8 @@ const Navigation = () => {
           </NavLink>
           {
             currentUser ? (
-              <NavLink as='span' onClick={signOutHandler}>SIGN OUT</NavLink>
+              <NavLink as='span' onClick={signOutHandler} to={''}>
+                SIGN OUT</NavLink>
               ) : ( <NavLink to='/auth'>SIGN IN</NavLink> )
           }
           <CartIcon />
