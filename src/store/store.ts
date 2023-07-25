@@ -1,6 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { AnyAction, Dispatch, Middleware, configureStore } from '@reduxjs/toolkit';
 // import { compose, legacy_createStore as createStore, applyMiddleware } from 'redux';
-import { persistStore, persistReducer } from 'redux-persist';
+import { persistStore, persistReducer, PersistConfig } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 // import thunk from 'redux-thunk';
@@ -11,16 +11,22 @@ import logger from 'redux-logger';
 import { rootReducer } from './root-reducers';
 import { rootSaga } from './root.saga';
 
-const persistConfig = {
+
+type ExtendedPersistConfig = PersistConfig<RootState> & {
+  whitelist: (keyof RootState)[]
+};
+
+const persistConfig: ExtendedPersistConfig = {
   key: 'root',
   storage,
-  blackList: ['user', 'categories']
+  whitelist: ['user']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const sagaMiddleware = createSagaMiddleware();
 
+export type RootState = ReturnType<typeof rootReducer>
 
 
 // const composeEnhancer = 
@@ -38,7 +44,7 @@ const middlewares = [
   process.env.NODE_ENV !== 'production' && logger,
   sagaMiddleware
 ].filter(
-  Boolean
+  (middleware): middleware is Middleware => Boolean(middleware)
 );
 
 export const store = configureStore({

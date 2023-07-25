@@ -1,12 +1,24 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { CartItem } from "./cart.types";
+import { CategoryItem } from "../categories/categories.types";
 
 
-const INITIAL_STATE = {
+export type CartState = {
+  readonly isCartOpen: boolean;
+  readonly cartItems: CartItem[]
+};
+
+export type RemoveItemFromCartPayload = { 
+  productToRemove: CartItem;
+  completeRemoval: boolean;
+};
+
+const INITIAL_STATE: CartState = {
   isCartOpen: false,
   cartItems: [],
 };
 
-const addCartItem = (cartItems, productToAdd) => {
+const addCartItem = (cartItems: CartItem[], productToAdd: CategoryItem): CartItem[] => {
   const cartItemsCopy = [...cartItems];
   const productInCartItem = cartItemsCopy.find((product) => product.id === productToAdd.id);
   if (productInCartItem){
@@ -17,7 +29,7 @@ const addCartItem = (cartItems, productToAdd) => {
   return cartItemsCopy;
 };
 
-const removeCartItem = (cartItems, productToRemove, completeRemoval = false) => {
+const removeCartItem = (cartItems: CartItem[], productToRemove: CartItem, completeRemoval: boolean = false): CartItem[] => {
   if (productToRemove.quantity === 1 || completeRemoval) {
     const filteredCart = cartItems.filter(cartItem => cartItem.id !== productToRemove.id);
     if(!filteredCart) return [];
@@ -37,13 +49,13 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState: INITIAL_STATE,
   reducers: {
-    setIsCartOpen(state, action) {
+    setIsCartOpen(state, action: PayloadAction<boolean>) {
       state.isCartOpen = action.payload;
     },
-    addItemToCart(state, action) {
+    addItemToCart(state, action: PayloadAction<CategoryItem>) {
       state.cartItems = addCartItem(state.cartItems, action.payload);
     },
-    removeItemFromCart(state, action) {
+    removeItemFromCart(state, action: PayloadAction<RemoveItemFromCartPayload>) {
       const { productToRemove, completeRemoval } = action.payload;
       state.cartItems = removeCartItem(state.cartItems, productToRemove, completeRemoval);
     },

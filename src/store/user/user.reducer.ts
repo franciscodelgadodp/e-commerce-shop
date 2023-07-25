@@ -1,35 +1,53 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { User } from 'firebase/auth';
+import { AdditionalInfo, UserData } from '../../utils/firebase/firebase.utils';
 
-const INITIAL_STATE = {
-  currentUser: null,
-  isLoading: false,
-  error: null
+
+
+export type UserState = {
+  readonly currentUser?: UserData;
+  readonly isLoading: boolean;
+  readonly error?: Error
 };
+
+const INITIAL_STATE: UserState = {
+  currentUser: undefined,
+  isLoading: false,
+  error: undefined
+};
+
+export type EmailSignInStart = PayloadAction<{ email: string, password: string}>;
+
+export type SignInSuccess = PayloadAction<UserData & { id: string }>;
+
+export type SignUpStart = PayloadAction<{ email: string, password: string, displayName: string }>;
+
+export type SignUpSuccess = PayloadAction<{ user: User, additionalInfo: AdditionalInfo }>;
 
 
 export const userSlice = createSlice({
   name: 'user',
   initialState: INITIAL_STATE,
   reducers: {
-    checkUserSession(state, action) {},
-    googleSignInStart(state, action) {},
-    emailSignInStart(state, action) {},
-    signInSuccess(state, action) {
+    checkUserSession() {},
+    googleSignInStart() {},
+    emailSignInStart(state, action: EmailSignInStart) {},
+    signInSuccess(state, action: SignInSuccess) {
       state.currentUser = action.payload
     },
-    signInFailed(state, action) {
+    signInFailed(state, action: PayloadAction<Error>) {
       state.error = action.payload
     },
-    signOutStart(state, action) {},
-    signOutSuccess(state, action) {
-      state.currentUser = null;
+    signOutStart() {},
+    signOutSuccess(state) {
+      state.currentUser = undefined;
     },
-    signOutFailed(state, action) {
+    signOutFailed(state, action: PayloadAction<Error>) {
       state.error = action.payload
     },
-    signUpStart(state, action) {},
-    signUpSuccess(state, action) {},
-    signUpFailed(state, action) {
+    signUpStart(state, action: SignUpStart) {},
+    signUpSuccess(state, action: SignUpSuccess) {},
+    signUpFailed(state, action: PayloadAction<Error>) {
       state.error = action.payload
     },
   }
