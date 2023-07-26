@@ -27,7 +27,6 @@ import {
   signInWithGooglePopup, 
   signOutUser 
 } from '../../utils/firebase/firebase.utils';
-import { PayloadAction } from '@reduxjs/toolkit';
 
 
 export function* signInAfterSignUp(action: SignUpSuccess) {

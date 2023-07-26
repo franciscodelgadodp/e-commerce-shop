@@ -10,11 +10,11 @@ import { CategoryItem } from '../../store/categories/categories.types';
 import { FC } from 'react';
 
 
-type ProductCard = {
+type ProductCardProps = {
   product: CategoryItem
 };
 
-const ProductCard: FC<ProductCard> = ({ product }) => {
+const ProductCard: FC<ProductCardProps> = ({ product }) => {
   const dispatch = useDispatch();
   const { name, price, imageUrl } = product;
 

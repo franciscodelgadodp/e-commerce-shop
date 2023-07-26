@@ -1,4 +1,4 @@
-import { AnyAction, Dispatch, Middleware, configureStore } from '@reduxjs/toolkit';
+import { Middleware, configureStore } from '@reduxjs/toolkit';
 // import { compose, legacy_createStore as createStore, applyMiddleware } from 'redux';
 import { persistStore, persistReducer, PersistConfig } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';

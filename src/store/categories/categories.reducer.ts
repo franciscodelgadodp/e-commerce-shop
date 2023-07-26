@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Category, CategoryItem } from './categories.types';
+import { Category } from './categories.types';
 
 
 export type CategoriesState = {
