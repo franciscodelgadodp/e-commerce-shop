@@ -7,6 +7,13 @@ export const CheckoutContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 50px auto 0;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  @media screen and (max-width: 800px) {
+    width: 100%;
+  }
 `;
 
 export const CheckoutHeader = styled.div`
@@ -23,6 +30,10 @@ export const HeaderBlock = styled.div`
 
   &:last-child {
     width: 8%;
+  }
+
+  @media screen and (max-width: 800px) {
+    margin-left: 15px;
   }
 `;
 
