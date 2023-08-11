@@ -7772,6 +7772,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fsm-iterator@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "fsm-iterator@npm:1.1.0"
+  checksum: ca35f89a6607df2542711faac62b4b9fdd1c90887bd7fbb0ed106d0d658a92376e996bdfc6db605665e25a63c510e5ea5986d054e3836becf95696ee928b0f6b
+  languageName: node
+  linkType: hard
+
 "function-bind@npm:^1.1.1":
   version: 1.1.1
   resolution: "function-bind@npm:1.1.1"
@@ -9895,6 +9902,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.isequal@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "lodash.isequal@npm:4.5.0"
+  checksum: da27515dc5230eb1140ba65ff8de3613649620e8656b19a6270afe4866b7bd461d9ba2ac8a48dcc57f7adac4ee80e1de9f965d89d4d81a0ad52bb3eec2609644
+  languageName: node
+  linkType: hard
+
+"lodash.ismatch@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "lodash.ismatch@npm:4.4.0"
+  checksum: a393917578842705c7fc1a30fb80613d1ac42d20b67eb26a2a6004d6d61ee90b419f9eb320508ddcd608e328d91eeaa2651411727eaa9a12534ed6ccb02fc705
+  languageName: node
+  linkType: hard
+
 "lodash.memoize@npm:^4.1.2":
   version: 4.1.2
   resolution: "lodash.memoize@npm:4.1.2"
@@ -10728,6 +10749,7 @@ __metadata:
     redux-logger: ^3.0.6
     redux-persist: ^6.0.0
     redux-saga: ^1.2.3
+    redux-saga-test-plan: ^4.0.6
     redux-thunk: ^2.4.2
     reselect: ^4.1.8
     sass: ^1.63.6
@@ -12421,6 +12443,21 @@ __metadata:
   peerDependencies:
     redux: ">4.0.0"
   checksum: edaf10dbf17351ce8058d0802357adae8665b3a1ff39371834e37838ddbe1a79cccbc717b8ba54acb5307651ccf51d0f7dc1cbc8dbae0726ff952d11ef61c6b8
+  languageName: node
+  linkType: hard
+
+"redux-saga-test-plan@npm:^4.0.6":
+  version: 4.0.6
+  resolution: "redux-saga-test-plan@npm:4.0.6"
+  dependencies:
+    fsm-iterator: ^1.1.0
+    lodash.isequal: ^4.5.0
+    lodash.ismatch: ^4.4.0
+  peerDependencies:
+    "@redux-saga/is": ^1.0.1
+    "@redux-saga/symbols": ^1.0.1
+    redux-saga: ^1.0.1
+  checksum: a3220210a42a51271c0dc8740ceaacf5cd0aa84cf46b986d5839a89133de00954940e5dde80145e1b4c69d7c0d61b9578d86da8776d2c0b5151dc498bc595685
   languageName: node
   linkType: hard
 
